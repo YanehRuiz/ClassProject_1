@@ -21,6 +21,7 @@ public class MapBuilder {
 	public static int ghostC = new Color(25, 255,0).getRGB();
 	public static int dotC = new Color(255, 10, 0).getRGB();
 	public static int bigDotC = new Color(167, 0, 150).getRGB();
+//	public static  int DotTick=0;
 
 	public static Map createMap(BufferedImage mapImage, Handler handler){
 		Map mapInCreation = new Map(handler);
@@ -29,6 +30,7 @@ public class MapBuilder {
 				int currentPixel = mapImage.getRGB(i, j);
 				int xPos = i*pixelMultiplier;
 				int yPos = j*pixelMultiplier;
+
 				if(currentPixel == boundBlock){
 					BaseStatic BoundBlock = new BoundBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler,getSprite(mapImage,i,j));
 					mapInCreation.addBlock(BoundBlock);
@@ -36,15 +38,20 @@ public class MapBuilder {
 					BaseDynamic PacMan = new PacMan(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(PacMan);
 					handler.setPacman((Game.PacMan.entities.Dynamics.PacMan) PacMan);
-				}else if(currentPixel == ghostC){
-					BaseDynamic ghost = new Ghost(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
-					mapInCreation.addEnemy(ghost);
+//				}else if(currentPixel == ghostC){
+//					BaseDynamic ghost = new Ghost(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+//					mapInCreation.addEnemy(ghost);
 				}else if(currentPixel == dotC){
 					BaseStatic dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(dot);
 				}else if(currentPixel == bigDotC){
+					//if(DotTick%2==0) {
 					BaseStatic bigDot = new BigDot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(bigDot);
+//					DotTick++;
+//					}else {
+//						DotTick++;
+					//}
 				}
 			}
 

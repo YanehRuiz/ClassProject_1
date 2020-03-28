@@ -36,7 +36,8 @@ public class Images {
     public static BufferedImage[] pacmanDown;
     public static BufferedImage[] bound;
     public static BufferedImage intro;
-    public static BufferedImage start;
+    public static BufferedImage start; 
+    public static BufferedImage PacbyLogo;
 
 
 
@@ -64,6 +65,7 @@ public class Images {
         pacmanUp = new BufferedImage[2];
         pacmanDown = new BufferedImage[2];
         bound = new BufferedImage[16];
+       
 
 
         try {
@@ -130,6 +132,7 @@ public class Images {
             galagaPlayerLaser = galagaSpriteSheet.crop(365 ,219,3,8);
 
             pacmanImageSheet = ImageIO.read(getClass().getResourceAsStream("/UI/SpriteSheets/PacMan/Background.png"));
+            PacbyLogo=ImageIO.read(getClass().getResourceAsStream("/UI/SpriteSheets/PacMan/PacbyLogo.jpg"));
             pacmanSpriteSheet = new SpriteSheet(pacmanImageSheet);
             map1 = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map1.png"));
             ghost = pacmanSpriteSheet.crop(456,64,16,16);
