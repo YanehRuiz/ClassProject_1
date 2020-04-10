@@ -38,13 +38,15 @@ public class Images {
     public static BufferedImage intro;
     public static BufferedImage start; 
     public static BufferedImage PacbyLogo;
-  //  public static BufferedImage [] pacmanDotsOFF;
+    public static BufferedImage[] pacmanfruits;
+ 
 
 
     public static BufferedImage galagaImageSheet;
     public SpriteSheet galagaSpriteSheet;
 
     public static BufferedImage pacmanImageSheet;
+	
     public SpriteSheet pacmanSpriteSheet;
 
     public Images() {
@@ -60,6 +62,7 @@ public class Images {
         galagaEnemyBee = new BufferedImage[8];
 
         pacmanDots = new BufferedImage[4];
+        pacmanfruits = new BufferedImage[3];
      //   pacmanDotsOFF = new BufferedImage[1];
         pacmanRight = new BufferedImage[2];
         pacmanLeft = new BufferedImage[2];
@@ -141,6 +144,9 @@ public class Images {
             pacmanDots[0] = pacmanSpriteSheet.crop(643,18,16,16);
             pacmanDots[1] = pacmanSpriteSheet.crop(623,18,16,16);
             pacmanDots[2]= pacmanSpriteSheet.crop(660, 18, 16, 16);
+            
+            pacmanfruits[2] = pacmanSpriteSheet.crop(520,50,16,16);
+            pacmanfruits[1] = pacmanSpriteSheet.crop(490,50,16,16);
 
             
             bound[0] = pacmanSpriteSheet.crop(603,18,16,16);//single

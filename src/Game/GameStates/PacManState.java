@@ -5,7 +5,9 @@ import Game.PacMan.World.MapBuilder;
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
+import Game.PacMan.entities.Statics.Cherry;
 import Game.PacMan.entities.Statics.Dot;
+import Game.PacMan.entities.Statics.Orange;
 import Main.Handler;
 import Resources.Images;
 
@@ -42,15 +44,26 @@ public class PacManState extends State {
                             handler.getScoreManager().addPacmanCurrentScore(10);
                         }
                     }else if (blocks instanceof BigDot){
-                    	
                         if (blocks.getBounds().intersects(handler.getPacman().getBounds())){
-                        	
                             handler.getMusicHandler().playEffect("pacman_chomp.wav");
                             toREmove.add(blocks);
                             handler.getScoreManager().addPacmanCurrentScore(100);
                             
                         }
+                    }else  if (blocks instanceof Cherry){
+                        if (blocks.getBounds().intersects(handler.getPacman().getBounds())){
+                            handler.getMusicHandler().playEffect("pacman_chomp.wav");
+                            toREmove.add(blocks);
+                            handler.getScoreManager().addPacmanCurrentScore(120);
+                        }
+                    } if (blocks instanceof Orange){
+                        if (blocks.getBounds().intersects(handler.getPacman().getBounds())){
+                            handler.getMusicHandler().playEffect("pacman_chomp.wav");
+                            toREmove.add(blocks);
+                            handler.getScoreManager().addPacmanCurrentScore(120);
+                        }
                     }
+                
                 }
                 for (BaseStatic removing: toREmove){
                     handler.getMap().getBlocksOnMap().remove(removing);

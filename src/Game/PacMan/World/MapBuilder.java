@@ -5,6 +5,8 @@ import Game.PacMan.entities.Dynamics.Ghost;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
+import Game.PacMan.entities.Statics.Cherry;
+import Game.PacMan.entities.Statics.Orange;
 import Game.PacMan.entities.Statics.BoundBlock;
 import Game.PacMan.entities.Statics.Dot;
 import Main.Handler;
@@ -12,9 +14,12 @@ import Resources.Images;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class MapBuilder {
 
+	
+	public static Random RChance= new Random();
 	public static int pixelMultiplier = 18;//change this for size of blocks
 	public static int boundBlock = new Color(0,0,0).getRGB();
 	public static int pacman = new Color(255, 255,0).getRGB();
@@ -44,9 +49,19 @@ public class MapBuilder {
 				}else if(currentPixel == dotC){
 					BaseStatic dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(dot);
-				}else if(currentPixel == bigDotC){			
+				}else if(currentPixel == bigDotC){	
+					int Rchance = (int) RChance.nextInt(31);
+					if(Rchance==1|| Rchance==19|| Rchance==17) {
+						BaseStatic Cherry = new Cherry(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+						mapInCreation.addBlock(Cherry);	
+					}else if(Rchance==4|| Rchance==22|| Rchance==8) {
+						BaseStatic Orange = new Orange(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+						mapInCreation.addBlock(Orange);	
+					
+					}else {
 					BaseStatic bigDot = new BigDot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(bigDot);				
+				}
 				}
 			}
 
