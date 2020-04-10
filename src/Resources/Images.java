@@ -39,6 +39,7 @@ public class Images {
     public static BufferedImage start; 
     public static BufferedImage PacbyLogo;
     public static BufferedImage[] pacmanfruits;
+    public static BufferedImage [] pacmanDeath;
  
 
 
@@ -69,6 +70,7 @@ public class Images {
         pacmanUp = new BufferedImage[2];
         pacmanDown = new BufferedImage[2];
         bound = new BufferedImage[16];
+        pacmanDeath = new BufferedImage[3];
         
        
 
@@ -148,6 +150,9 @@ public class Images {
             pacmanfruits[2] = pacmanSpriteSheet.crop(520,50,16,16);
             pacmanfruits[1] = pacmanSpriteSheet.crop(490,50,16,16);
 
+            pacmanDeath[0]=pacmanSpriteSheet.crop(32,1,16,16);//whole
+            pacmanDeath[1]=pacmanSpriteSheet.crop(16,33,16,16);
+            pacmanDeath[2]=pacmanSpriteSheet.crop(0,33,16,16);
             
             bound[0] = pacmanSpriteSheet.crop(603,18,16,16);//single
             bound[1] = pacmanSpriteSheet.crop(615,37,16,16);//right open

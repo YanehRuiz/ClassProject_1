@@ -1,18 +1,14 @@
 package Game.PacMan.World;
 
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Random;
+
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
 import Main.Handler;
-import Resources.Images;
-
-import java.awt.*;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Random;
-
-import com.sun.glass.ui.Timer;
 
 public class Map {
 

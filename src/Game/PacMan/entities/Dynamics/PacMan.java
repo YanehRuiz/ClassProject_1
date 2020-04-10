@@ -11,12 +11,19 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class PacMan extends BaseDynamic{
+	
+	private int health = 3;
+	private boolean pacmanDead = false;
+	private boolean pacmanLive = false;
 
     protected double velX,velY,speed = 1;
     public String facing = "Left";
     public boolean moving = true,turnFlag = false;
-    public Animation leftAnim,rightAnim,upAnim,downAnim;
+    public Animation leftAnim,rightAnim,upAnim,downAnim,deathAnimation;
     int turnCooldown = 20;
+    int spawnCoolDown = 5*60;
+    public int spawnx = 126;
+    public int spawny=648;
 
 
     public PacMan(int x, int y, int width, int height, Handler handler) {
@@ -25,6 +32,7 @@ public class PacMan extends BaseDynamic{
         rightAnim = new Animation(128,Images.pacmanRight);
         upAnim = new Animation(128,Images.pacmanUp);
         downAnim = new Animation(128,Images.pacmanDown);
+        deathAnimation = new Animation(350,Images.pacmanDeath);
     }
 
     @Override
@@ -54,6 +62,17 @@ public class PacMan extends BaseDynamic{
         if (turnFlag){
             turnCooldown--;
         }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P) && health > 0) { //Kill Player	
+        	health--;
+        	pacmanDead = true;
+        	deathAnimation.tick();
+        	handler.getMap().reset();
+       	handler.getMusicHandler().playEffect("death.wav");
+        }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N) && health < 3) { // +1 health
+        	health ++;
+       	handler.getMusicHandler().playEffect("life.wav");
+        }
 
         if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) && !turnFlag && checkPreHorizontalCollision("Right")){
             facing = "Right";
@@ -77,6 +96,30 @@ public class PacMan extends BaseDynamic{
             checkHorizontalCollision();
         }else{
             checkVerticalCollisions();
+        }
+        if (handler.getPacManState().startCooldown <=0) {
+        	speed = 1;
+        }else {
+        	speed=0;
+        }
+        if (pacmanDead) {
+        	if (spawnCoolDown <= 0) {
+        		health--;
+        		x = spawnx;
+        		y = spawny;
+        		deathAnimation.reset();
+        		spawnCoolDown = 5*60;
+        		speed = 1;
+        		if (health < 1) {
+        			health = 0;
+        		}
+        		facing = "Right";
+        		pacmanDead = false;
+        	}else {
+        		speed = 0;
+        		deathAnimation.tick();
+        		spawnCoolDown--;
+        	}
         }
 
     }
@@ -109,12 +152,15 @@ public class PacMan extends BaseDynamic{
             Rectangle enemyBounds = !toUp ? enemy.getTopBounds() : enemy.getBottomBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
                 pacmanDies = true;
+                deathAnimation.tick();
                 break;
             }
         }
 
         if(pacmanDies) {
             handler.getMap().reset();
+            pacmanDead=true;
+            handler.getMusicHandler().playEffect("death.wav");
         }
     }
 
@@ -157,12 +203,15 @@ public class PacMan extends BaseDynamic{
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
                 pacmanDies = true;
+                deathAnimation.tick();
                 break;
             }
         }
 
         if(pacmanDies) {
             handler.getMap().reset();
+            pacmanDead=true;
+            handler.getMusicHandler().playEffect("death.wav");
         }else {
 
             for (BaseStatic brick : bricks) {
@@ -206,6 +255,13 @@ public class PacMan extends BaseDynamic{
     }
     public double getVelY() {
         return velY;
+    }
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
 
