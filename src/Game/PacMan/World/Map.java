@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.sun.glass.events.KeyEvent;
+
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
@@ -58,7 +60,7 @@ public class Map {
         
         
         for (BaseDynamic entity:enemiesOnMap) {
-            if (entity instanceof PacMan) {
+            if (entity instanceof PacMan && handler.getPacman().pacmanDead==false) {
                 switch (((PacMan) entity).facing){
                     case "Right":
                         g2.drawImage(((PacMan) entity).rightAnim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
@@ -73,11 +75,12 @@ public class Map {
                         g2.drawImage(((PacMan) entity).downAnim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
                         break;
                 }
-                
+            }else if(entity instanceof PacMan &&(handler.getPacman().pacmanDead==true || handler.getKeyManager().keyJustPressed(KeyEvent.VK_P))) {
+            	g2.drawImage(((PacMan) entity).deathAnimation.getCurrentFrame(), entity.x,entity.y, entity.width, entity.height, null);
+            	   
             }
             else {
                 g2.drawImage(entity.sprite, entity.x, entity.y, entity.width, entity.height, null);
-              
             }
         }
 

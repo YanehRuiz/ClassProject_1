@@ -22,7 +22,6 @@ public class BaseDynamic extends BaseEntity {
     }
     protected void checkHorizontal() {
         boolean toRight = direction.equals("Right");
-
         Rectangle mushroomBounds = toRight ? getRightBounds() : getLeftBounds();
 
         for (BaseStatic brick : handler.getMap().getBlocksOnMap()) {

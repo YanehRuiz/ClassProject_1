@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class PacMan extends BaseDynamic{
 	
 	private int health = 3;
-	private boolean pacmanDead = false;
+	public boolean pacmanDead = false;
 	private boolean pacmanLive = false;
 
     protected double velX,velY,speed = 1;
@@ -37,7 +37,8 @@ public class PacMan extends BaseDynamic{
 
     @Override
     public void tick(){
-
+    	
+    	
         switch (facing){
             case "Right":
                 x+=velX;
@@ -103,8 +104,8 @@ public class PacMan extends BaseDynamic{
         	speed=0;
         }
         if (pacmanDead) {
+        	deathAnimation.tick();
         	if (spawnCoolDown <= 0) {
-        		health--;
         		x = spawnx;
         		y = spawny;
         		deathAnimation.reset();
@@ -117,7 +118,6 @@ public class PacMan extends BaseDynamic{
         		pacmanDead = false;
         	}else {
         		speed = 0;
-        		deathAnimation.tick();
         		spawnCoolDown--;
         	}
         }
@@ -152,15 +152,18 @@ public class PacMan extends BaseDynamic{
             Rectangle enemyBounds = !toUp ? enemy.getTopBounds() : enemy.getBottomBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
                 pacmanDies = true;
+                pacmanDead=true;
                 deathAnimation.tick();
-                break;
+               // break;
             }
         }
 
         if(pacmanDies) {
+        	pacmanDead=true;
+        	deathAnimation.tick();
             handler.getMap().reset();
-            pacmanDead=true;
             handler.getMusicHandler().playEffect("death.wav");
+            
         }
     }
 
@@ -203,14 +206,16 @@ public class PacMan extends BaseDynamic{
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
                 pacmanDies = true;
+                pacmanDead=true;
                 deathAnimation.tick();
-                break;
+               // break;
             }
         }
 
         if(pacmanDies) {
+        	 pacmanDead=true;
+        	 deathAnimation.tick();
             handler.getMap().reset();
-            pacmanDead=true;
             handler.getMusicHandler().playEffect("death.wav");
         }else {
 
