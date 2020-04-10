@@ -84,4 +84,9 @@ public class BaseEntity {
         this.height = height;
     }
 
+	public void tick() {
+	
+		
+	}
+
 }

@@ -34,7 +34,7 @@ public class PacManState extends State {
                     entity.tick();
                 }
                 ArrayList<BaseStatic> toREmove = new ArrayList<>();
-                for (BaseStatic blocks: handler.getMap().getBlocksOnMap()){
+                for (BaseStatic blocks: handler.getMap().getBlocksOnMap()){blocks.tick();
                     if (blocks instanceof Dot){
                         if (blocks.getBounds().intersects(handler.getPacman().getBounds())){
                             handler.getMusicHandler().playEffect("pacman_chomp.wav");
@@ -42,11 +42,13 @@ public class PacManState extends State {
                             handler.getScoreManager().addPacmanCurrentScore(10);
                         }
                     }else if (blocks instanceof BigDot){
+                    	
                         if (blocks.getBounds().intersects(handler.getPacman().getBounds())){
+                        	
                             handler.getMusicHandler().playEffect("pacman_chomp.wav");
                             toREmove.add(blocks);
                             handler.getScoreManager().addPacmanCurrentScore(100);
-
+                            
                         }
                     }
                 }

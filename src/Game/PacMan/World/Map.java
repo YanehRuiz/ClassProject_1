@@ -3,11 +3,16 @@ package Game.PacMan.World;
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
+import Game.PacMan.entities.Statics.BigDot;
 import Main.Handler;
+import Resources.Images;
 
 import java.awt.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
+
+import com.sun.glass.ui.Timer;
 
 public class Map {
 
@@ -17,7 +22,8 @@ public class Map {
     private double bottomBorder;
     private Random rand;
     private int mapBackground;
-
+    
+ 
     public Map(Handler handler) {
         this.handler=handler;
         this.rand = new Random();
@@ -36,13 +42,25 @@ public class Map {
         enemiesOnMap.add(entity);
 
     }
-
+    
+    
     public void drawMap(Graphics2D g2) {
         for (BaseStatic block:blocksOnMap) {
-
-            g2.drawImage(block.sprite, block.x, block.y, block.width, block.height, null);
-
+        	if(block instanceof BigDot) {
+        	    	 g2.drawImage(((BigDot) block).onAnim.getCurrentFrame(), block.x,block.y, block.width, block.height, null);
+   
+        		} else {
+        	
+        	 g2.drawImage(block.sprite, block.x, block.y, block.width, block.height, null);
+        
         }
+        }
+        
+
+        
+       
+        
+        
         for (BaseDynamic entity:enemiesOnMap) {
             if (entity instanceof PacMan) {
                 switch (((PacMan) entity).facing){
@@ -59,6 +77,7 @@ public class Map {
                         g2.drawImage(((PacMan) entity).downAnim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
                         break;
                 }
+                
             }
             else {
                 g2.drawImage(entity.sprite, entity.x, entity.y, entity.width, entity.height, null);

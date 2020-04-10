@@ -44,14 +44,9 @@ public class MapBuilder {
 				}else if(currentPixel == dotC){
 					BaseStatic dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(dot);
-				}else if(currentPixel == bigDotC){
-					//if(DotTick%2==0) {
+				}else if(currentPixel == bigDotC){			
 					BaseStatic bigDot = new BigDot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
-					mapInCreation.addBlock(bigDot);
-//					DotTick++;
-//					}else {
-//						DotTick++;
-					//}
+					mapInCreation.addBlock(bigDot);				
 				}
 			}
 
