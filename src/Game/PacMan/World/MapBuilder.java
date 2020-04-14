@@ -2,6 +2,7 @@ package Game.PacMan.World;
 
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.Ghost;
+import Game.PacMan.entities.Dynamics.GhostSpawner;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
@@ -18,7 +19,7 @@ import java.util.Random;
 
 public class MapBuilder {
 
-	
+
 	public static Random RChance= new Random();
 	public static int pixelMultiplier = 18;//change this for size of blocks
 	public static int boundBlock = new Color(0,0,0).getRGB();
@@ -26,7 +27,7 @@ public class MapBuilder {
 	public static int ghostC = new Color(25, 255,0).getRGB();
 	public static int dotC = new Color(255, 10, 0).getRGB();
 	public static int bigDotC = new Color(167, 0, 150).getRGB();
-//	public static  int DotTick=0;
+	//	public static  int DotTick=0;
 
 	public static Map createMap(BufferedImage mapImage, Handler handler){
 		Map mapInCreation = new Map(handler);
@@ -44,8 +45,13 @@ public class MapBuilder {
 					mapInCreation.addEnemy(PacMan);
 					handler.setPacman((Game.PacMan.entities.Dynamics.PacMan) PacMan);
 				}else if(currentPixel == ghostC){
-					BaseDynamic ghost = new Ghost(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
-					mapInCreation.addEnemy(ghost);
+//					GhostSpawner allghosts=new GhostSpawner(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+//					mapInCreation.addEnemy(allghosts.Red);
+//					mapInCreation.addEnemy(allghosts.Blue);
+//					mapInCreation.addEnemy(allghosts.Orange);
+//					mapInCreation.addEnemy(allghosts.Pink);
+					BaseDynamic ghostSpawn = new GhostSpawner(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(ghostSpawn);
 				}else if(currentPixel == dotC){
 					BaseStatic dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(dot);
@@ -57,11 +63,11 @@ public class MapBuilder {
 					}else if(Rchance==4|| Rchance==22|| Rchance==8) {
 						BaseStatic Orange = new Orange(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 						mapInCreation.addBlock(Orange);	
-					
+
 					}else {
-					BaseStatic bigDot = new BigDot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
-					mapInCreation.addBlock(bigDot);				
-				}
+						BaseStatic bigDot = new BigDot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+						mapInCreation.addBlock(bigDot);				
+					}
 				}
 			}
 
@@ -76,27 +82,27 @@ public class MapBuilder {
 		int upPixel;
 		int downPixel;
 		if (i>0) {
-			 leftPixel = mapImage.getRGB(i - 1, j);
+			leftPixel = mapImage.getRGB(i - 1, j);
 		}else{
-			 leftPixel = pacman;
+			leftPixel = pacman;
 
 		}
 		if (i<mapImage.getWidth()-1) {
-			 rightPixel = mapImage.getRGB(i + 1, j);
+			rightPixel = mapImage.getRGB(i + 1, j);
 		}else{
-			 rightPixel= pacman;
+			rightPixel= pacman;
 
 		}
 		if (j>0) {
-			 upPixel = mapImage.getRGB(i, j - 1);
+			upPixel = mapImage.getRGB(i, j - 1);
 		}else{
-			 upPixel = pacman;
+			upPixel = pacman;
 
 		}
 		if (j<mapImage.getHeight()-1) {
-			 downPixel = mapImage.getRGB(i, j + 1);
+			downPixel = mapImage.getRGB(i, j + 1);
 		}else{
-			 downPixel = pacman;
+			downPixel = pacman;
 
 		}
 

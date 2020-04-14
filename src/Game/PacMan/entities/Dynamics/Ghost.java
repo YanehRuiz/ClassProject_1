@@ -1,14 +1,18 @@
 package Game.PacMan.entities.Dynamics;
 
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Random;
-
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BoundBlock;
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
+import jdk.nashorn.internal.ir.Block;
+import jdk.nashorn.internal.ir.BlockStatement;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Ghost extends BaseDynamic{
 
@@ -21,7 +25,7 @@ public class Ghost extends BaseDynamic{
     public boolean hasleftcage = false;
 
 
-    public Ghost(int x, int y, int width, int height, Handler handler) {
+    public Ghost(int x, int y, int width, int height, Handler handler, BufferedImage ghost) {
         super(x, y, width, height, handler, Images.ghost);
         leftAnim = new Animation(128,Images.pacmanLeft);
         rightAnim = new Animation(128,Images.pacmanRight);
