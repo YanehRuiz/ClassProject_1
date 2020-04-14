@@ -1,5 +1,6 @@
 package Game.PacMan.entities.Dynamics;
 
+import Game.Galaga.Entities.EnemyBee;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BoundBlock;
 import Main.Handler;
@@ -153,8 +154,8 @@ public class PacMan extends BaseDynamic{
             if (pacmanBounds.intersects(enemyBounds)) {
                 pacmanDies = true;
                 pacmanDead=true;
-                deathAnimation.tick();
-               // break;
+                deathAnimation.tick(); 
+                break;
             }
         }
 
@@ -205,12 +206,18 @@ public class PacMan extends BaseDynamic{
         for(BaseDynamic enemy : enemies){
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
-                pacmanDies = true;
+               
+            	pacmanDies = true;
                 pacmanDead=true;
                 deathAnimation.tick();
-               // break;
+                if(pacmanDies || pacmanDead || deathAnimation.end) {
+              		 health--;
+              	 }
+                break;
+               }
             }
-        }
+    
+      
 
         if(pacmanDies) {
         	 pacmanDead=true;
