@@ -15,7 +15,6 @@ public class PacMan extends BaseDynamic{
 	
 	public int health = 3;
 	public boolean pacmanDead = false;
-	private boolean pacmanLive = false;
 
     protected double velX,velY,speed = 1;
     public String facing = "Left";
@@ -23,8 +22,8 @@ public class PacMan extends BaseDynamic{
     public Animation leftAnim,rightAnim,upAnim,downAnim,deathAnimation;
     int turnCooldown = 20;
     int spawnCoolDown = 5*60;
-    public int spawnx = 126;
-    public int spawny = 648;
+    public int spawnx = 350;
+    public int spawny = 400;
 
 
     public PacMan(int x, int y, int width, int height, Handler handler) {
@@ -65,11 +64,7 @@ public class PacMan extends BaseDynamic{
             turnCooldown--;
         }
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P) && health > 0) { //Kill Player	
-        	health--;
         	pacmanDead = true;
-        	deathAnimation.tick();
-        	handler.getMap().reset();
-       	handler.getMusicHandler().playEffect("death.wav");
         }
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N) && health < 3) { // +1 health
         	health ++;
@@ -112,6 +107,8 @@ public class PacMan extends BaseDynamic{
         		deathAnimation.reset();
         		spawnCoolDown = 5*60;
         		speed = 1;
+        		health--;
+                handler.getMusicHandler().playEffect("death.wav");
         		if (health < 1) {
         			health = 0;
         		}
@@ -153,17 +150,15 @@ public class PacMan extends BaseDynamic{
             Rectangle enemyBounds = !toUp ? enemy.getTopBounds() : enemy.getBottomBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
                 pacmanDies = true;
-                pacmanDead=true;
-                deathAnimation.tick(); 
                 break;
             }
         }
 
         if(pacmanDies) {
         	pacmanDead=true;
-        	deathAnimation.tick();
+        	
             handler.getMap().reset();
-            handler.getMusicHandler().playEffect("death.wav");
+
             
         }
     }
@@ -208,11 +203,6 @@ public class PacMan extends BaseDynamic{
             if (pacmanBounds.intersects(enemyBounds)) {
                
             	pacmanDies = true;
-                pacmanDead=true;
-                deathAnimation.tick();
-                if(pacmanDies || pacmanDead || deathAnimation.end) {
-              		 health--;
-              	 }
                 break;
                }
             }
@@ -221,9 +211,8 @@ public class PacMan extends BaseDynamic{
 
         if(pacmanDies) {
         	 pacmanDead=true;
-        	 deathAnimation.tick();
+        	
             handler.getMap().reset();
-            handler.getMusicHandler().playEffect("death.wav");
         }else {
 
             for (BaseStatic brick : bricks) {

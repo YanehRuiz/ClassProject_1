@@ -1,28 +1,27 @@
 package Game.PacMan.entities.Dynamics;
 
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
+
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BoundBlock;
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
-import jdk.nashorn.internal.ir.Block;
-import jdk.nashorn.internal.ir.BlockStatement;
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Ghost extends BaseDynamic{
 
     protected double velX,velY,speed = 1;
     public String facing = "Up";
-    public boolean moving = true,turnFlag = false;
-    public Animation leftAnim,rightAnim,upAnim,downAnim;
+    public boolean moving = true,turnFlag = false,vulnerable = false;
+    public Animation leftAnim,rightAnim,upAnim,downAnim,vulnerableAnim;
     int turnCooldown = 30;
+    public int vulnerableCoolDown = 8*60;
     public boolean hasgoneout=false;
     public boolean hasleftcage = false;
+    private int spawnx = 350, spawny = 350;
 
 
     public Ghost(int x, int y, int width, int height, Handler handler, BufferedImage ghost) {
@@ -31,6 +30,7 @@ public class Ghost extends BaseDynamic{
         rightAnim = new Animation(128,Images.pacmanRight);
         upAnim = new Animation(128,Images.pacmanUp);
         downAnim = new Animation(128,Images.pacmanDown);
+        vulnerableAnim = new Animation(128,Images.vulnerableGhost);
     }
 
     @Override
@@ -104,7 +104,22 @@ public class Ghost extends BaseDynamic{
         }else{
             checkVerticalCollisions();
         }
-
+        if (vulnerable) {
+        	vulnerableAnim.tick();
+        	if (vulnerableCoolDown <= 0) {
+        		x = spawnx;
+        		y = spawny;
+        		vulnerableAnim.reset();
+        		vulnerableCoolDown = 8*60;
+        		handler.getMusicHandler().playEffect("life.wav");
+        		speed = 1;
+        		facing = "Right";
+        		vulnerable = false;
+        	}else {
+        		speed = 0;
+        		vulnerableCoolDown--;
+        	}
+        }
     }
 
 
