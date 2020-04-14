@@ -1,17 +1,14 @@
 package Game.PacMan.entities.Dynamics;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Random;
+
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BoundBlock;
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
-import jdk.nashorn.internal.ir.Block;
-import jdk.nashorn.internal.ir.BlockStatement;
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Ghost extends BaseDynamic{
 

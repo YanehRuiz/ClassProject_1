@@ -47,6 +47,9 @@ public class ScoreManager {
     }
 
     public int getPacmanHighScore() {
+    	if (pacmanHighScore < pacmanCurrentScore) {
+    		pacmanHighScore = pacmanCurrentScore;
+    	}
         return pacmanHighScore;
     }
 
@@ -55,6 +58,7 @@ public class ScoreManager {
     }
 
     public int getPacmanCurrentScore() {
+    	
         return pacmanCurrentScore;
     }
 

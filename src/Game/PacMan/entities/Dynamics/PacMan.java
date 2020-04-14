@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class PacMan extends BaseDynamic{
 	
-	private int health = 3;
+	public int health = 3;
 	public boolean pacmanDead = false;
 	private boolean pacmanLive = false;
 
@@ -24,7 +24,7 @@ public class PacMan extends BaseDynamic{
     int turnCooldown = 20;
     int spawnCoolDown = 5*60;
     public int spawnx = 126;
-    public int spawny=648;
+    public int spawny = 648;
 
 
     public PacMan(int x, int y, int width, int height, Handler handler) {
@@ -269,6 +269,9 @@ public class PacMan extends BaseDynamic{
         return velY;
     }
     public int getHealth() {
+    	if (health < 1) {
+    		handler.getPacManState().restart = true;
+    	}
         return health;
     }
 

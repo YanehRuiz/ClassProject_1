@@ -20,7 +20,9 @@ public class PacManState extends State {
     private UIManager uiManager;
     public String Mode = "Intro";
     public int startCooldown = 60*4;//seven seconds for the music to finish
-
+    public boolean restart = false;
+    public boolean endState = false;
+    
     public PacManState(Handler handler){
         super(handler);
         handler.setMap(MapBuilder.createMap(Images.map1, handler));
@@ -67,6 +69,17 @@ public class PacManState extends State {
                 }
                 for (BaseStatic removing: toREmove){
                     handler.getMap().getBlocksOnMap().remove(removing);
+                }
+                if (restart) {
+                	endState = true;
+                	handler.getPacman().health = 3;
+                	Mode = "Intro";
+                	handler.getPacman().setX(handler.getPacman().spawnx);
+                	handler.getPacman().setY(handler.getPacman().spawny);
+                	handler.getScoreManager().setPacmanCurrentScore(0);
+                	handler.getPacman().facing = "Right";
+                	restart = false;
+                	
                 }
             }else{
                 startCooldown--;

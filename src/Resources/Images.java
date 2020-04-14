@@ -40,6 +40,24 @@ public class Images {
     public static BufferedImage PacbyLogo;
     public static BufferedImage[] pacmanfruits;
     public static BufferedImage [] pacmanDeath;
+    public static BufferedImage [] rGhostLeft;
+    public static BufferedImage [] rGhostRight;
+    public static BufferedImage [] rGhostUp;
+    public static BufferedImage [] rGhostDown;
+    public static BufferedImage [] pGhostLeft;
+    public static BufferedImage [] pGhostRight;
+    public static BufferedImage [] pGhostUp;
+    public static BufferedImage [] pGhostDown;
+    public static BufferedImage [] bGhostLeft;
+    public static BufferedImage [] bGhostRight;
+    public static BufferedImage [] bGhostUp;
+    public static BufferedImage [] bGhostDown;
+    public static BufferedImage [] oGhostLeft;
+    public static BufferedImage [] oGhostRight;
+    public static BufferedImage [] oGhostUp;
+    public static BufferedImage [] oGhostDown;
+    
+    public static BufferedImage [] vulnerableGhost;
  
 
 
@@ -71,6 +89,28 @@ public class Images {
         pacmanDown = new BufferedImage[2];
         bound = new BufferedImage[16];
         pacmanDeath = new BufferedImage[3];
+        
+        rGhostLeft = new BufferedImage[2];
+        pGhostLeft = new BufferedImage[2];
+        bGhostLeft = new BufferedImage[2];
+        oGhostLeft = new BufferedImage[2];
+        
+        rGhostRight = new BufferedImage[2];
+        pGhostRight = new BufferedImage[2];
+        bGhostRight = new BufferedImage[2];
+        oGhostRight = new BufferedImage[2];
+        
+        rGhostUp = new BufferedImage[2];
+        pGhostUp = new BufferedImage[2];
+        bGhostUp = new BufferedImage[2];
+        oGhostUp = new BufferedImage[2];
+        
+        rGhostDown = new BufferedImage[2];
+        pGhostDown = new BufferedImage[2];
+        bGhostDown = new BufferedImage[2];
+        oGhostDown = new BufferedImage[2];
+        
+        vulnerableGhost = new BufferedImage[4];
         
        
 
@@ -187,6 +227,48 @@ public class Images {
             pacmanDown[0] = pacmanSpriteSheet.crop(473,48,13,12);
             pacmanDown[1] = pacmanSpriteSheet.crop(489,1,13,13);
 
+            
+            rGhostLeft[0] = pacmanSpriteSheet.crop(488,64,16,16);
+            rGhostLeft[1] = pacmanSpriteSheet.crop(504,64,16,16);
+            pGhostLeft[0] = pacmanSpriteSheet.crop(488,80,16,16);
+            pGhostLeft[1] = pacmanSpriteSheet.crop(504,80,16,16);
+            bGhostLeft[0] = pacmanSpriteSheet.crop(488,96,16,16);
+            bGhostLeft[1] = pacmanSpriteSheet.crop(504,96,16,16);
+            oGhostLeft[0] = pacmanSpriteSheet.crop(488,112,16,16);
+            oGhostLeft[1] = pacmanSpriteSheet.crop(504,112,16,16);
+            
+            rGhostRight[0] = pacmanSpriteSheet.crop(456,64,16,16);
+            rGhostRight[1] = pacmanSpriteSheet.crop(472,64,16,16);
+            pGhostRight[0] = pacmanSpriteSheet.crop(456,80,16,16);
+            pGhostRight[1] = pacmanSpriteSheet.crop(472,80,16,16);
+            bGhostRight[0] = pacmanSpriteSheet.crop(456,96,16,16);
+            bGhostRight[1] = pacmanSpriteSheet.crop(472,96,16,16);
+            oGhostRight[0] = pacmanSpriteSheet.crop(456,112,16,16);
+            oGhostRight[1] = pacmanSpriteSheet.crop(472,112,16,16);
+            
+            rGhostUp[0] = pacmanSpriteSheet.crop(520,64,16,16);
+            rGhostUp[1] = pacmanSpriteSheet.crop(536,64,16,16);
+            pGhostUp[0] = pacmanSpriteSheet.crop(520,80,16,16);
+            pGhostUp[1] = pacmanSpriteSheet.crop(536,80,16,16);
+            bGhostUp[0] = pacmanSpriteSheet.crop(520,96,16,16);
+            bGhostUp[1] = pacmanSpriteSheet.crop(536,96,16,16);
+            oGhostUp[0] = pacmanSpriteSheet.crop(520,112,16,16);
+            oGhostUp[1] = pacmanSpriteSheet.crop(536,112,16,16);
+            
+            rGhostDown[0] = pacmanSpriteSheet.crop(552,64,16,16);
+            rGhostDown[1] = pacmanSpriteSheet.crop(568,64,16,16);
+            pGhostDown[0] = pacmanSpriteSheet.crop(552,80,16,16);
+            pGhostDown[1] = pacmanSpriteSheet.crop(568,80,16,16);
+            bGhostDown[0] = pacmanSpriteSheet.crop(552,96,16,16);
+            bGhostDown[1] = pacmanSpriteSheet.crop(568,96,16,16);
+            oGhostDown[0] = pacmanSpriteSheet.crop(552,112,16,16);
+            oGhostDown[1] = pacmanSpriteSheet.crop(568,112,16,16);
+            
+            vulnerableGhost[0] = pacmanSpriteSheet.crop(584,64,16,16);
+            vulnerableGhost[1] = pacmanSpriteSheet.crop(600,64,16,16);
+            vulnerableGhost[2] = pacmanSpriteSheet.crop(616,64,16,16);
+            vulnerableGhost[3] = pacmanSpriteSheet.crop(632,64,16,16);
+            
             intro = ImageIO.read(getClass().getResourceAsStream("/UI/SpriteSheets/PacMan/intro.png"));
             start = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/startScreen.png"));
 

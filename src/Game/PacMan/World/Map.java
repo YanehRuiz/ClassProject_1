@@ -1,10 +1,9 @@
 package Game.PacMan.World;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
-
-import com.sun.glass.events.KeyEvent;
 
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.PacMan;
